@@ -115,18 +115,18 @@ async function starts() {
 			const isCmd = body.startsWith(prefix)
 
 			mess = {
-				wait: '⌛ Sedang di Prosess ⌛',
+				wait: '⌛ SProcessando sua figurinha...⌛',
 				success: '✔️ Berhasil ✔️',
 				error: {
-					stick: '❌ Gagal, terjadi kesalahan saat mengkonversi gambar ke sticker ❌',
-					Iv: '❌ Link tidak valid ❌'
+					stick: '❌ Falha, ocorreu um erro ao converter a imagem em uma figurinha ❌',
+					Iv: '❌ Link inválido ❌'
 				},
 				only: {
-					group: '❌ Perintah ini hanya bisa di gunakan dalam group! ❌',
-					ownerG: '❌ Perintah ini hanya bisa di gunakan oleh owner group! ❌',
-					ownerB: '❌ Perintah ini hanya bisa di gunakan oleh owner bot! ❌',
-					admin: '❌ Perintah ini hanya bisa di gunakan oleh admin group! ❌',
-					Badmin: '❌ Perintah ini hanya bisa di gunakan ketika bot menjadi admin! ❌'
+					group: '❌ Este comando só pode ser usado em grupos! ❌',
+					ownerG: '❌ Este comando só pode ser usado pelo dono do grupo! ❌',
+					ownerB: '❌ Este comando só pode ser usado pelo dono do bot ❌',
+					admin: '❌ Este comando só pode ser usado por administradores do grupo! ❌',
+					Badmin: '❌ Este comando só pode ser usado quando o bot se torna administrador! ❌'
 				}
 			}
 
@@ -245,7 +245,7 @@ async function starts() {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
+								reply(`❌ Falha ao converter $ {type} em figurinhas`)
 							})
 							.on('end', function () {
 								console.log('Finish')
@@ -300,7 +300,7 @@ async function starts() {
 							.toFormat('webp')
 							.save(ran)*/
 					} else {
-						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
+						reply(`Envie a imagem com o adesivo de legenda $ {prefix} ou a tag de imagem que foi enviada`)
 					}
 					break
 				case 'gtts':
@@ -346,7 +346,7 @@ async function starts() {
 					})
 					break
 				case 'nsfwloli':
-					if (!isNsfw) return reply('❌ *FALSE* ❌')
+					if (!isNsfw) return reply('❌ ERRO ❌')
 					loli.getNSFWLoli(async (err, res) => {
 						if (err) return reply('❌ *ERROR* ❌')
 						buffer = await getBuffer(res.url)
@@ -528,9 +528,9 @@ async function starts() {
 					ran = getRandom('.png')
 					exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 						fs.unlinkSync(media)
-						if (err) return reply('❌ Gagal, pada saat mengkonversi sticker ke gambar ❌')
+						if (err) return reply('❌ Falha ao converter adesivos em imagens ❌')
 						buffer = fs.readFileSync(ran)
-						client.sendMessage(from, buffer, image, {quoted: mek, caption: '>//<'})
+						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Aqui está!'})
 						fs.unlinkSync(ran)
 					})
 					break
